@@ -1,0 +1,17 @@
+---
+interface Props {
+  quote: string;
+  author: string;
+  neighborhood: string;
+}
+const { quote, author, neighborhood } = Astro.props;
+---
+<figure class="rounded-2xl bg-cream border border-[var(--color-sage-100)] p-8 shadow-sm">
+  <div class="text-[var(--color-sage-300)] text-4xl font-display leading-none mb-2" aria-hidden="true">"</div>
+  <blockquote class="font-display text-xl leading-snug text-[var(--color-charcoal)]">
+    {quote}
+  </blockquote>
+  <figcaption class="mt-6 text-sm text-[var(--color-sage-700)] font-medium">
+    {author} <span class="text-[var(--color-charcoal)]/60">· {neighborhood}</span>
+  </figcaption>
+</figure>

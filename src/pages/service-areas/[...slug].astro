@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTASection from '../../components/CTASection.astro';
+import { getCollection, render } from 'astro:content';
+import { SITE } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const areas = (await getCollection('areas')).filter((a) => !a.data.comingSoon);
+  return areas.map((area) => ({
+    params: { slug: area.id },
+    props: { area },
+  }));
+}
+
+const { area } = Astro.props;
+const { Content } = await render(area);
+const cityName = area.data.title.replace('Landscaping in ', '');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `Landscaping in ${cityName}`,
+  description: area.data.intro,
+  provider: { '@id': `${SITE.url}/#business` },
+  areaServed: { '@type': 'City', name: cityName, containedInPlace: 'San Diego, CA' },
+};
+---
+<Layout
+  title={`${area.data.title} | ${SITE.name}`}
+  description={area.data.intro}
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src={area.data.image}
+        alt={`${cityName} landscaping project — Sierra Verde Landscaping`}
+        class="h-full w-full object-cover"
+        loading="eager"
+        width="2000"
+        height="1100"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-charcoal)]/80 via-[var(--color-charcoal)]/50 to-[var(--color-charcoal)]/20"></div>
+    </div>
+
+    <div class="relative container-prose py-28 lg:py-36 text-cream">
+      <p class="eyebrow !text-[var(--color-sage-300)]">Service area</p>
+      <h1 class="mt-3 font-display text-5xl md:text-6xl leading-[1.05] max-w-3xl">
+        {area.data.title}
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg text-cream/90 leading-relaxed">
+        {area.data.intro}
+      </p>
+      <div class="mt-8">
+        <a href="/contact/" class="btn-primary !bg-cream !text-[var(--color-sage-900)] hover:!bg-[var(--color-sage-300)]">
+          Get a Quote for {cityName}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-prose py-20 grid lg:grid-cols-5 gap-12">
+    <article class="lg:col-span-3 prose max-w-none">
+      <Content />
+    </article>
+
+    <aside class="lg:col-span-2">
+      <div class="rounded-3xl bg-[var(--color-sage-50)] border border-[var(--color-sage-100)] p-8 sticky top-24">
+        <p class="eyebrow">Local notes</p>
+        <p class="mt-3 text-sm leading-relaxed text-[var(--color-charcoal)]/80">{area.data.notes}</p>
+        <hr class="my-6 border-[var(--color-sage-100)]" />
+        <p class="eyebrow">Services in {cityName}</p>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="/services/lawn-maintenance/" class="hover:text-[var(--color-sage-700)]">→ Lawn maintenance</a></li>
+          <li><a href="/services/irrigation/" class="hover:text-[var(--color-sage-700)]">→ Irrigation repair &amp; install</a></li>
+          <li><a href="/services/hedge-trimming/" class="hover:text-[var(--color-sage-700)]">→ Hedge &amp; shrub trimming</a></li>
+          <li><a href="/services/weed-control/" class="hover:text-[var(--color-sage-700)]">→ Weed control</a></li>
+          <li><a href="/services/pruning/" class="hover:text-[var(--color-sage-700)]">→ Pruning &amp; plant care</a></li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+
+  <CTASection
+    heading={`Ready to talk about your ${cityName} property?`}
+    subheading="We respond to most quote requests the same day."
+  />
+</Layout>

@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CTASection from '../components/CTASection.astro';
+import { SITE } from '../lib/site';
+---
+<Layout
+  title={`About Gabriel & Sierra Verde Landscaping | ${SITE.name}`}
+  description="The story of a family-owned San Diego landscaping company. How Gabriel started Sierra Verde in 2021 and the values that have kept clients with us since."
+>
+  <PageHeader
+    eyebrow="Our story"
+    title="Built on community, values, and long-lasting relationships."
+    intro="Sierra Verde Landscaping has been a small, owner-operated company since day one. Here's why that matters, and how it shows up in the work."
+  />
+
+  <section class="container-prose grid lg:grid-cols-5 gap-12 pb-24">
+    <div class="lg:col-span-2">
+      <img
+        src="https://images.unsplash.com/photo-1605648916361-9bc12ad6a569?auto=format&fit=crop&w=900&q=80"
+        alt="Portrait of Gabriel, founder of Sierra Verde Landscaping, working in a client's front yard"
+        class="rounded-3xl shadow-lg w-full"
+        loading="lazy"
+        width="900"
+        height="1100"
+      />
+      <div class="mt-8 rounded-2xl bg-[var(--color-sage-50)] border border-[var(--color-sage-100)] p-6">
+        <p class="eyebrow">Quick facts</p>
+        <dl class="mt-4 space-y-3 text-sm">
+          <div class="flex justify-between gap-4">
+            <dt class="text-[var(--color-charcoal)]/60">Founded</dt>
+            <dd class="font-medium">{SITE.founded}</dd>
+          </div>
+          <div class="flex justify-between gap-4">
+            <dt class="text-[var(--color-charcoal)]/60">Owner</dt>
+            <dd class="font-medium">{SITE.founder}</dd>
+          </div>
+          <div class="flex justify-between gap-4">
+            <dt class="text-[var(--color-charcoal)]/60">Headquartered</dt>
+            <dd class="font-medium">San Diego, CA</dd>
+          </div>
+          <div class="flex justify-between gap-4">
+            <dt class="text-[var(--color-charcoal)]/60">Services</dt>
+            <dd class="font-medium text-right">Maintenance, irrigation, pruning, weed control</dd>
+          </div>
+          <div class="flex justify-between gap-4">
+            <dt class="text-[var(--color-charcoal)]/60">Licensed</dt>
+            <dd class="font-medium">Yes &amp; insured</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="lg:col-span-3 prose max-w-none">
+      <h2 class="font-display text-3xl text-[var(--color-sage-900)]">Why Sierra Verde exists</h2>
+      <p class="text-[var(--color-charcoal)]/80 leading-relaxed">
+        Most landscaping companies are built to scale: more trucks, more crews, more accounts. The trade-off is that the quality of any one yard becomes someone else's problem. Gabriel started Sierra Verde to do the opposite — keep the crew small, keep the routes tight, and stay accountable for every property we touch.
+      </p>
+
+      <h3 class="mt-10 font-display text-2xl text-[var(--color-sage-900)]">How we work</h3>
+      <p class="text-[var(--color-charcoal)]/80 leading-relaxed">
+        Every new client starts with a walk-through. We look at your soil, your irrigation, your plants, and what you actually want from the space. Then we put together a maintenance plan that fits — not a copy-paste schedule from the last yard we worked on. From there, the same small crew comes every visit. You see the same faces. We learn your yard.
+      </p>
+
+      <h3 class="mt-10 font-display text-2xl text-[var(--color-sage-900)]">What "family-owned" means here</h3>
+      <p class="text-[var(--color-charcoal)]/80 leading-relaxed">
+        It means Gabriel still personally answers the phone. It means when something goes wrong, it doesn't get routed through three layers of dispatch. It means we plan to be doing this in San Diego for the next twenty years, so the way we treat your property today reflects how we want to be talked about a decade from now.
+      </p>
+
+      <h3 class="mt-10 font-display text-2xl text-[var(--color-sage-900)]">What we won't do</h3>
+      <ul class="mt-4 space-y-2 text-[var(--color-charcoal)]/80">
+        <li>Buzz-cut hedges to save five minutes.</li>
+        <li>Spray glyphosate by default — only as a last resort and only with your approval.</li>
+        <li>Take on more accounts than we can service well. We'd rather refer you to a friend than over-promise.</li>
+      </ul>
+    </div>
+  </section>
+
+  <CTASection
+    heading="Want to see what we'd do with your yard?"
+    subheading="We'll come out, walk the property, and put together a no-pressure proposal."
+  />
+</Layout>

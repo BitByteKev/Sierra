@@ -1,0 +1,30 @@
+---
+import { SITE } from '../lib/site';
+---
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0">
+    <img
+      src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=2000&q=80"
+      alt="Lush landscaped front yard in San Diego with manicured lawn, drought-tolerant plantings, and stone path"
+      class="h-full w-full object-cover"
+      loading="eager"
+      width="2000"
+      height="1200"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-charcoal)]/75 via-[var(--color-charcoal)]/40 to-transparent"></div>
+  </div>
+
+  <div class="relative container-prose py-32 lg:py-44 text-cream">
+    <p class="eyebrow !text-[var(--color-sage-300)]">Family-Owned · San Diego · Est. {SITE.founded}</p>
+    <h1 class="mt-4 font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] max-w-3xl">
+      The grass <em class="not-italic text-[var(--color-sage-300)]">is</em> greener<br/>on our side.
+    </h1>
+    <p class="mt-6 max-w-xl text-lg text-cream/90 leading-relaxed">
+      Full-service landscape maintenance, irrigation, and seasonal care for homeowners across San Diego — from La Jolla to North Park.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="/contact/" class="btn-primary">Get a Free Quote</a>
+      <a href="/our-work/" class="btn-outline !text-cream !border-cream hover:!bg-cream hover:!text-[var(--color-sage-900)]">See Our Work</a>
+    </div>
+  </div>
+</section>

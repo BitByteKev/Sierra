@@ -1,0 +1,29 @@
+---
+import { SITE } from '../lib/site';
+interface Props {
+  heading?: string;
+  subheading?: string;
+}
+const {
+  heading = 'Ready for a yard you actually want to come home to?',
+  subheading = 'Tell us about your property. We respond to most quote requests the same day.',
+} = Astro.props;
+---
+<section class="container-prose py-20">
+  <div class="rounded-3xl bg-[var(--color-sage-900)] text-cream px-8 md:px-16 py-16 md:py-20 relative overflow-hidden">
+    <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-[var(--color-sage-700)]/40 blur-3xl" aria-hidden="true"></div>
+    <div class="relative max-w-2xl">
+      <p class="eyebrow !text-[var(--color-sage-300)]">Free Quote</p>
+      <h2 class="mt-3 font-display text-4xl md:text-5xl leading-tight">{heading}</h2>
+      <p class="mt-4 text-cream/80 leading-relaxed">{subheading}</p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="/contact/" class="btn-primary !bg-cream !text-[var(--color-sage-900)] hover:!bg-[var(--color-sage-300)]">
+          Request a Quote
+        </a>
+        <a href={`tel:${SITE.phoneTel}`} class="btn-outline !text-cream !border-cream">
+          {SITE.phone}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CTASection from '../components/CTASection.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '../lib/site';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+<Layout
+  title={`Recent Landscaping Projects in San Diego | ${SITE.name}`}
+  description="A look at recent Sierra Verde Landscaping projects across La Jolla, North Park, Kensington, Talmadge, and Sorrento Valley — front yards, hedges, irrigation, and full restorations."
+>
+  <PageHeader
+    eyebrow="Our work"
+    title="Recent projects across San Diego."
+    intro="Every yard tells you what it needs if you slow down enough to listen. Here are a few we've been particularly proud of."
+  />
+
+  <section class="container-prose pb-24">
+    <div class="grid gap-12 md:grid-cols-2">
+      {projects.map((p, i) => (
+        <article class={i % 3 === 0 ? 'md:col-span-2' : ''}>
+          <div class="overflow-hidden rounded-3xl">
+            <img
+              src={p.data.image}
+              alt={p.data.imageAlt}
+              class={`w-full object-cover ${i % 3 === 0 ? 'h-96 md:h-[500px]' : 'h-80'}`}
+              loading="lazy"
+              width="1600"
+              height="1200"
+            />
+          </div>
+          <div class="mt-5 flex items-center gap-3 text-sm flex-wrap">
+            <span class="eyebrow">{p.data.neighborhood}</span>
+            <span class="opacity-30">·</span>
+            <span class="text-[var(--color-charcoal)]/60">{p.data.services.join(' · ')}</span>
+          </div>
+          <h2 class="mt-2 font-display text-3xl leading-tight">{p.data.title}</h2>
+          <p class="mt-3 text-[var(--color-charcoal)]/75 leading-relaxed">{p.data.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <CTASection
+    heading="Want yours to be the next one?"
+    subheading="Tell us about your property and we'll put a plan together."
+  />
+</Layout>

@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import CTASection from '../../components/CTASection.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '../../lib/site';
+
+const areas = (await getCollection('areas')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+<Layout
+  title={`Service Areas | San Diego Neighborhoods We Serve | ${SITE.name}`}
+  description="Sierra Verde Landscaping serves La Jolla, North Park, Kensington, Talmadge, Sorrento Valley, and surrounding San Diego neighborhoods on weekly maintenance routes."
+>
+  <PageHeader
+    eyebrow="Where we work"
+    title="Tight routes mean reliable service."
+    intro="We keep our service area focused on neighborhoods we can reach within 20 minutes of each other. That's how we keep our schedule predictable for every client."
+  />
+
+  <section class="container-prose pb-24">
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {areas.map((area) => (
+        <a href={area.data.comingSoon ? '/contact/' : `/service-areas/${area.id}/`} class="group block rounded-2xl overflow-hidden bg-cream border border-[var(--color-sage-100)] hover:border-[var(--color-sage-300)] transition shadow-sm hover:shadow-md">
+          <div class="aspect-[4/3] overflow-hidden">
+            <img
+              src={area.data.image}
+              alt={`Landscaping in ${area.data.title.replace('Landscaping in ', '')}, San Diego`}
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              loading="lazy"
+              width="1600"
+              height="1200"
+            />
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between gap-3">
+              <h2 class="font-display text-2xl text-[var(--color-sage-900)] group-hover:text-[var(--color-sage-700)] transition">
+                {area.data.title.replace('Landscaping in ', '')}
+              </h2>
+              {area.data.comingSoon && (
+                <span class="text-[10px] uppercase tracking-widest bg-[var(--color-sage-100)] text-[var(--color-sage-900)] px-2 py-1 rounded-full">Soon</span>
+              )}
+            </div>
+            <p class="mt-2 text-sm text-[var(--color-charcoal)]/70 leading-relaxed line-clamp-3">{area.data.intro}</p>
+            <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-[var(--color-sage-700)]">
+              {area.data.comingSoon ? 'Get a quote' : 'Read more'}
+              <span aria-hidden="true" class="transition group-hover:translate-x-1">→</span>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CTASection />
+</Layout>

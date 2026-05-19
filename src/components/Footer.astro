@@ -1,0 +1,53 @@
+---
+import { SITE, NAV } from '../lib/site';
+const year = new Date().getFullYear();
+---
+<footer class="mt-24 bg-[var(--color-sage-900)] text-cream">
+  <div class="container-prose py-16 grid gap-12 md:grid-cols-4">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-3 mb-4">
+        <img src="/logo.avif" alt="" width="48" height="48" class="h-12 w-auto opacity-95" />
+        <span class="font-display text-2xl">Sierra Verde Landscaping</span>
+      </div>
+      <p class="text-sm leading-relaxed text-cream/80 max-w-md">
+        {SITE.description}
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3 text-sm">
+        <a href={`tel:${SITE.phoneTel}`} class="underline decoration-[var(--color-sage-300)] underline-offset-4 hover:text-[var(--color-sage-300)]">
+          {SITE.phone}
+        </a>
+        <span class="opacity-40">·</span>
+        <a href={`mailto:${SITE.email}`} class="underline decoration-[var(--color-sage-300)] underline-offset-4 hover:text-[var(--color-sage-300)]">
+          {SITE.email}
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="eyebrow !text-cream/60 mb-4">Explore</h3>
+      <ul class="space-y-2 text-sm">
+        {NAV.map((item) => (
+          <li>
+            <a href={item.href} class="hover:text-[var(--color-sage-300)] transition">{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="eyebrow !text-cream/60 mb-4">Service Areas</h3>
+      <ul class="space-y-2 text-sm">
+        {SITE.serviceAreas.map((area) => (
+          <li class="text-cream/80">{area}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-cream/10">
+    <div class="container-prose py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/60">
+      <span>© {year} Sierra Verde Landscaping. Family-owned, San Diego, CA.</span>
+      <span>Licensed &amp; Insured · Est. {SITE.founded}</span>
+    </div>
+  </div>
+</footer>
